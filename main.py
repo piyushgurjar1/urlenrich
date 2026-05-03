@@ -8,21 +8,11 @@ _logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
-demo_data = {
-    "clean_sold_comps": [
-        {"address": "364 Lindon St, Port Charlotte, FL 33954", "source": "Realtor.com"},
-        {"address": "22238 Clinton Ave, Port Charlotte, FL 33954", "source": "Zillow"},
-    ],
-    "clean_active_listings": [
-        {"address": "286 Salisbury St, Port Charlotte, FL 33954", "source": "Realtor.com"},
-        {"address": "286 Salisbury St, Port Charlotte, FL 33954", "source": "Redfin"},
-    ],
-}
 
 @app.on_event("startup")
 async def startup_event():
     _logger.info("FastAPI starting up... triggering demo enrichment test.")
-    asyncio.create_task(_enrich_source_urls(demo_data))
+    # asyncio.create_task(_enrich_source_urls(demo_data))
 
 @app.post("/enrich")
 async def enrich_endpoint(data: dict):
